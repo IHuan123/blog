@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>vue面试题 - wanghuan</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="wanghuan"><meta name="msapplication-TileImage" content="/img/logo.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="wanghuan"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="props、methods、data、computed、watch初始化顺序Vue在初始化事会调用initState方法"><meta property="og:type" content="blog"><meta property="og:title" content="vue面试题"><meta property="og:url" content="https://bobodog.cn/2022/06/20/vue%E9%9D%A2%E8%AF%95%E9%A2%98/"><meta property="og:site_name" content="wanghuan"><meta property="og:description" content="props、methods、data、computed、watch初始化顺序Vue在初始化事会调用initState方法"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://cn.vuejs.org/images/lifecycle.png"><meta property="og:image" content="https://staging-cn.vuejs.org/assets/lifecycle.16e4c08e.png"><meta property="og:image" content="https://camo.githubusercontent.com/a8d70aafa46e5ee1afca79506eff90acf3824c757ddb8118c8a90370543db99b/68747470733a2f2f747661312e73696e61696d672e636e2f6c617267652f65366339643234656c79316830776a7a69623478316a3231376b30736f3736782e6a7067"><meta property="article:published_time" content="2022-06-20T09:44:24.000Z"><meta property="article:modified_time" content="2022-07-07T12:46:40.504Z"><meta property="article:author" content="wanghuan"><meta property="article:tag" content="Vue"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://cn.vuejs.org/images/lifecycle.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://bobodog.cn/2022/06/20/vue%E9%9D%A2%E8%AF%95%E9%A2%98/"},"headline":"vue面试题","image":["https://cn.vuejs.org/images/lifecycle.png","https://staging-cn.vuejs.org/assets/lifecycle.16e4c08e.png"],"datePublished":"2022-06-20T09:44:24.000Z","dateModified":"2022-07-07T12:46:40.504Z","author":{"@type":"Person","name":"IHuan123"},"publisher":{"@type":"Organization","name":"wanghuan","logo":{"@type":"ImageObject","url":"https://bobodog.cn/img/logo.svg"}},"description":"props、methods、data、computed、watch初始化顺序Vue在初始化事会调用initState方法"}</script><link rel="canonical" href="https://bobodog.cn/2022/06/20/vue%E9%9D%A2%E8%AF%95%E9%A2%98/"><link rel="icon" href="/img/logo.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+          Array
+              .from(document.querySelectorAll('.tab-content'))
+              .forEach($tab => {
+                  $tab.classList.add('is-hidden');
+              });
+          Array
+              .from(document.querySelectorAll('.tabs li'))
+              .forEach($tab => {
+                  $tab.classList.remove('is-active');
+              });
+          const $activeTab = document.querySelector(location.hash);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+          const $tabMenu = document.querySelector(`a[href="${location.hash}"]`);
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="wanghuan" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">目录</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/IHuan123"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal"><i class="fas fa-angle-double-right"></i>vue面试题</h1><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-06-20T09:44:24.000Z" title="2022/6/20 17:44:24">2022-06-20</time>发表</span><span class="level-item"><time dateTime="2022-07-07T12:46:40.504Z" title="2022/7/7 20:46:40">2022-07-07</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Vue/">Vue</a></span><span class="level-item">27 分钟读完 (大约4043个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><div class="content"><h1 id="props、methods、data、computed、watch初始化顺序"><a href="#props、methods、data、computed、watch初始化顺序" class="headerlink" title="props、methods、data、computed、watch初始化顺序"></a>props、methods、data、computed、watch初始化顺序</h1><p>Vue在初始化事会调用<code>initState</code>方法</p>
+<span id="more"></span>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">initState</span>(<span class="params">vm: Component</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> opts = vm.<span class="property">$options</span></span><br><span class="line">  <span class="keyword">if</span> (opts.<span class="property">props</span>) <span class="title function_">initProps</span>(vm, opts.<span class="property">props</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Composition API</span></span><br><span class="line">  <span class="title function_">initSetup</span>(vm)</span><br><span class="line">	<span class="comment">// methods-&gt;data-&gt;computed-&gt;watch</span></span><br><span class="line">  <span class="keyword">if</span> (opts.<span class="property">methods</span>) <span class="title function_">initMethods</span>(vm, opts.<span class="property">methods</span>)</span><br><span class="line">  <span class="keyword">if</span> (opts.<span class="property">data</span>) &#123;</span><br><span class="line">    <span class="title function_">initData</span>(vm)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> ob = <span class="title function_">observe</span>((vm.<span class="property">_data</span> = &#123;&#125;))</span><br><span class="line">    ob &amp;&amp; ob.<span class="property">vmCount</span>++</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (opts.<span class="property">computed</span>) <span class="title function_">initComputed</span>(vm, opts.<span class="property">computed</span>)</span><br><span class="line">  <span class="keyword">if</span> (opts.<span class="property">watch</span> &amp;&amp; opts.<span class="property">watch</span> !== nativeWatch) &#123;</span><br><span class="line">    <span class="title function_">initWatch</span>(vm, opts.<span class="property">watch</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>从改方法中可以看出Vue初始化顺序：props-&gt;methods-&gt;data-&gt;computed-&gt;watch</li>
+</ul>
+<h1 id="v-if、v-for优先级"><a href="#v-if、v-for优先级" class="headerlink" title="v-if、v-for优先级"></a>v-if、v-for优先级</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">genElement</span>(<span class="params">el: ASTElement, state: CodegenState</span>): string &#123;</span><br><span class="line">  <span class="keyword">if</span> (el.<span class="property">parent</span>) &#123;</span><br><span class="line">    el.<span class="property">pre</span> = el.<span class="property">pre</span> || el.<span class="property">parent</span>.<span class="property">pre</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (el.<span class="property">staticRoot</span> &amp;&amp; !el.<span class="property">staticProcessed</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">genStatic</span>(el, state)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (el.<span class="property">once</span> &amp;&amp; !el.<span class="property">onceProcessed</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">genOnce</span>(el, state)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (el.<span class="property">for</span> &amp;&amp; !el.<span class="property">forProcessed</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">genFor</span>(el, state)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (el.<span class="property">if</span> &amp;&amp; !el.<span class="property">ifProcessed</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">genIf</span>(el, state)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (el.<span class="property">tag</span> === <span class="string">&#x27;template&#x27;</span> &amp;&amp; !el.<span class="property">slotTarget</span> &amp;&amp; !state.<span class="property">pre</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">genChildren</span>(el, state) || <span class="string">&#x27;void 0&#x27;</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (el.<span class="property">tag</span> === <span class="string">&#x27;slot&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">genSlot</span>(el, state)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// component or element</span></span><br><span class="line">    <span class="keyword">let</span> code</span><br><span class="line">    <span class="keyword">if</span> (el.<span class="property">component</span>) &#123;</span><br><span class="line">      code = <span class="title function_">genComponent</span>(el.<span class="property">component</span>, el, state)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> data</span><br><span class="line">      <span class="keyword">if</span> (!el.<span class="property">plain</span> || (el.<span class="property">pre</span> &amp;&amp; state.<span class="title function_">maybeComponent</span>(el))) &#123;</span><br><span class="line">        data = <span class="title function_">genData</span>(el, state)</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> children = el.<span class="property">inlineTemplate</span> ? <span class="literal">null</span> : <span class="title function_">genChildren</span>(el, state, <span class="literal">true</span>)</span><br><span class="line">      code = <span class="string">`_c(&#x27;<span class="subst">$&#123;el.tag&#125;</span>&#x27;<span class="subst">$&#123;</span></span></span><br><span class="line"><span class="subst"><span class="string">        data ? <span class="string">`,<span class="subst">$&#123;data&#125;</span>`</span> : <span class="string">&#x27;&#x27;</span> // data</span></span></span><br><span class="line"><span class="subst"><span class="string">      &#125;</span><span class="subst">$&#123;</span></span></span><br><span class="line"><span class="subst"><span class="string">        children ? <span class="string">`,<span class="subst">$&#123;children&#125;</span>`</span> : <span class="string">&#x27;&#x27;</span> // children</span></span></span><br><span class="line"><span class="subst"><span class="string">      &#125;</span>)`</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// module transforms</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; state.<span class="property">transforms</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">      code = state.<span class="property">transforms</span>[i](el, code)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> code</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在源码中发现 先处理静态节点（staticRoot） 然后处理once 最后才会处理for 代码显示for优先于if 断点调试之后也是证实for优先于if 结论：</li>
+</ul>
+<p><strong>1、v-for优先于v-if被解析（把你怎么知道的告诉面试官，看过源码）</strong><br> <strong>2、如果同时出现，每次渲染都会先执行循环在判断条件，无论如何循环都不可避免，浪费了性能</strong><br> <strong>3、要避免出现这种情况，在外层嵌套template，在这一层进行v-if判断，然后在内部进行v-for循环</strong></p>
+<h1 id="Vue组件之间的通信"><a href="#Vue组件之间的通信" class="headerlink" title="Vue组件之间的通信"></a>Vue组件之间的通信</h1><p>1.组件间常用方式有以下8种：</p>
+<ul>
+<li>props</li>
+<li>$emits&#x2F;props</li>
+<li><del>$children</del>&#x2F;$parent</li>
+<li>$attrs&#x2F;<del>$listeners</del></li>
+<li>ref</li>
+<li>$root</li>
+<li><del>eventbus</del></li>
+<li>vuex</li>
+</ul>
+<p>注意vue3种废弃的几个api <a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/guide/migration/children.html#%E6%A6%82%E8%A7%88">$children</a>、<a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/guide/migration/listeners-removed.html#%E6%A6%82%E8%A7%88">$lisnters</a>、<a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/guide/migration/events-api.html#%E6%A6%82%E8%A7%88">$eventbus</a></p>
+<p>父子通信：props、$emits、$parent、ref、$attrs</p>
+<p>兄弟组件：$parent、$root、eventsbus、vuex</p>
+<p>跨层级：eventbus、vuex、provide&#x2F;inject</p>
+<h1 id="Vue生命周期以及每个阶段做的事"><a href="#Vue生命周期以及每个阶段做的事" class="headerlink" title="Vue生命周期以及每个阶段做的事"></a>Vue生命周期以及每个阶段做的事</h1><p>1.每个Vue组件被创建后都会经过一系列初始化步聚，比如，他需要数据观测，模版编译，挂载实例到dom上，以及数据变化时更新dom。</p>
+<p>2.Vue生命周期总共分为8个阶段：创建前后，载入前后，更新前后，销毁前后，以及一些特殊的生命周期。Vue3中新增了3个用于调试和服务端渲染场景。</p>
+<table>
+<thead>
+<tr>
+<th>Vue2</th>
+<th>Vue2</th>
+<th>描述</th>
+<th>结合实践</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>beforeCreate</td>
+<td>beforeCreate</td>
+<td>组件实例被创建之初</td>
+<td>通常用于插件开发中执行一些初始化任务</td>
+</tr>
+<tr>
+<td>created</td>
+<td>created</td>
+<td>组件实例已经完全创建</td>
+<td>组件初始化完毕，可以访问各种数据，获取接口数据等</td>
+</tr>
+<tr>
+<td>beforeMounted</td>
+<td>beforeMounted</td>
+<td>组件挂载之前</td>
+<td></td>
+</tr>
+<tr>
+<td>mounted</td>
+<td>mounted</td>
+<td>组件挂载到实例上去之后</td>
+<td>dom已创建，可用于获取访问数据和dom元素；访问子组件等。</td>
+</tr>
+<tr>
+<td>beforeUpdate</td>
+<td>beforeUpdate</td>
+<td>组件数据发生变化，更新之前</td>
+<td>此时<code>view</code>层的还未更新，可用于更新前获取各种状态。</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>updated</td>
+<td>组件数据更新之后</td>
+<td>完成view&#96;层的更新，更新后，所有状态已是最新。</td>
+</tr>
+<tr>
+<td>beforeDestroy</td>
+<td>beforeUnmounted</td>
+<td>组件实例销毁之前</td>
+<td>实例销毁前调用，可用于一些定时器或订阅的取消。</td>
+</tr>
+<tr>
+<td>destroyed</td>
+<td>unmounted</td>
+<td>组件实例销毁之后</td>
+<td>销毁一个实例。可清理它与其他实例的连接，解绑它的全部指令及时间监听器</td>
+</tr>
+<tr>
+<td>activated</td>
+<td>activated</td>
+<td>keep-alive缓存的组件激活时</td>
+<td></td>
+</tr>
+<tr>
+<td>deactivated</td>
+<td>deactivated</td>
+<td>keep-alive缓存的组件停用时调用</td>
+<td></td>
+</tr>
+<tr>
+<td>errorCaptured</td>
+<td>errorCaptured</td>
+<td>捕获一个来自子孙组件的错误时被调用</td>
+<td></td>
+</tr>
+<tr>
+<td>–</td>
+<td>renderTracked</td>
+<td>调试钩子，响应式依赖被收集时调用</td>
+<td></td>
+</tr>
+<tr>
+<td>–</td>
+<td>renderTriggered</td>
+<td>调试钩子，响应式依赖被触发时调用</td>
+<td></td>
+</tr>
+<tr>
+<td>–</td>
+<td>serverPrefetch</td>
+<td>Sir only，组件实例在服务器上被渲染前调用</td>
+<td></td>
+</tr>
+</tbody></table>
+<div style="display:flex;width:100%;background:#fff;">
+  <img src='https://cn.vuejs.org/images/lifecycle.png' style="display:block;width:50%;border-right:1px solid #000;object-fit:contain">
+  <img src='https://staging-cn.vuejs.org/assets/lifecycle.16e4c08e.png' style="display:block;width:50%;object-fit:contain">
+</div>
+
+
+
+<h1 id="双向绑定使用和原理"><a href="#双向绑定使用和原理" class="headerlink" title="双向绑定使用和原理"></a>双向绑定使用和原理</h1><p>1.vue中双向绑定是一个指令<code>v-model</code>，可以绑定一个响应式数据到视图，同时视图中变化能改变该值。</p>
+<p>2.<code>v-model</code>是语法糖，默认情况下相当于:<code>value</code>和<code>@input</code>。使用<code>v-model</code>可以减少大量繁琐的事件处理代码，提高开发效率。</p>
+<p>3.通常在表单项使用<code>v-model</code>，还可以在自定义组件上使用，表示某个值的输入和输出控制。</p>
+<p>4.通过<code>&lt;input v-model=&quot;xxx&quot;/&gt;</code>的方式绑定到表单元素value上，对于checkbox，可以使用<code>true-value</code>和<code>false-value</code>指定特殊的值，对于radio可以使用value指定特殊的值；对于select可以通过options元素的value设置特殊的值，还可以结合.lazy，.number，.trim对v-model的行为做进一步的限制；<code>v-model</code>用在自定义组件上时又有很大的不同，vue3中它类似于<code>.sync</code>修饰符，最终展开的结果时modelValue属性和update:modelValue事件；vue3中我们甚至可以用参数形式指定多个不同的绑定，例如：v-model:foo和v-model:bar。</p>
+<p>5.我做过测试，输出包含v-model模板的组件渲染函数，发现它会被转换为value属性的绑定以及一个事件监听，事件回调函数中会做相应变量更新操作，这说明神奇魔法实际上是vue的编译器完成的。</p>
+<h1 id="Vue中如何扩展一个组件"><a href="#Vue中如何扩展一个组件" class="headerlink" title="Vue中如何扩展一个组件"></a>Vue中如何扩展一个组件</h1><p><font size="4">答题思路：</font></p>
+<p>按照逻辑扩展和内容扩展来列举，逻辑扩展有：mixins、extends、composition api；内容扩展有slots；</p>
+<p>分别说出他们使用方法、场景差异和问题。</p>
+<p>作为扩展，还可以说说vue3中新引入的composition api带来的变化。</p>
+<ol>
+<li>常见的组件扩展方法有：mixins，slots，extends等</li>
+<li>混入mixins是分发 Vue 组件中可复用功能的非常灵活的方式。混入对象可以包含任意组件选项。当组件使用混入对象时，所有混入对象的选项将被混入该组件本身的选项。</li>
+<li>插槽主要用于vue组件中的内容分发，也可以用于组件扩展。如果要精确分发到不同位置可以使用具名插槽，如果要使用子组件中的数据可以使用作用域插槽。</li>
+<li>组件选项中还有一个不太常用的选项extends，也可以起到扩展组件的目的。</li>
+<li>混入的数据和方法不能明确判断来源且可能和当前组件内变量产生命名冲突，vue3中引入的composition api，可以很好解决这些问题，利用独立出来的响应式模块可以很方便的编写独立逻辑并提供响应式的数据，然后在setup选项中有机组合使用。</li>
+</ol>
+<p><font size="4">可能追问：</font></p>
+<p>Vue.extend方法你用过吗？它能用来做组件扩展吗？</p>
+<h1 id="子组件可以直接改变父组件的数据么"><a href="#子组件可以直接改变父组件的数据么" class="headerlink" title="子组件可以直接改变父组件的数据么?"></a>子组件可以直接改变父组件的数据么?</h1><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>这是一个实践知识点，组件化开发过程中有个单项数据流原则，不在子组件中修改父组件是个常识问题。</p>
+<p>参考文档：<a target="_blank" rel="noopener" href="https://staging.vuejs.org/guide/components/props.html#one-way-data-flow">https://staging.vuejs.org/guide/components/props.html#one-way-data-flow</a></p>
+<hr>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ol>
+<li>讲讲单项数据流原则，表明为何不能这么做</li>
+<li>举几个常见场景的例子说说解决方案</li>
+<li>结合实践讲讲如果需要修改父组件状态应该如何做</li>
+</ol>
+<hr>
+<h3 id="回答范例"><a href="#回答范例" class="headerlink" title="回答范例"></a>回答范例</h3><ol>
+<li>所有的 prop 都使得其父子之间形成了一个单向下行绑定：父级 prop 的更新会向下流动到子组件中，但是反过来则不行。这样会防止从子组件意外变更父级组件的状态，从而导致你的应用的数据流向难以理解。另外，每次父级组件发生变更时，子组件中所有的 prop 都将会刷新为最新的值。这意味着你不应该在一个子组件内部改变 prop。如果你这样做了，Vue 会在浏览器控制台中发出警告。 const props &#x3D; defineProps([‘foo’]) &#x2F;&#x2F; ❌ 下面行为会被警告, props是只读的! props.foo &#x3D; ‘bar’</li>
+</ol>
+<hr>
+<ol>
+<li>实际开发过程中有两个场景会想要修改一个属性：<ul>
+<li>这个 prop 用来传递一个初始值；这个子组件接下来希望将其作为一个本地的 prop 数据来使用。在这种情况下，最好定义一个本地的 data，并将这个 prop 用作其初始值： const props &#x3D; defineProps([‘initialCounter’]) const counter &#x3D; ref(props.initialCounter)</li>
+<li>这个 prop 以一种原始的值传入且需要进行转换。在这种情况下，最好使用这个 prop 的值来定义一个计算属性： const props &#x3D; defineProps([‘size’]) &#x2F;&#x2F; prop变化，计算属性自动更新 const normalizedSize &#x3D; computed(() &#x3D;&gt; props.size.trim().toLowerCase())</li>
+</ul>
+</li>
+<li>实践中如果确实想要改变父组件属性应该emit一个事件让父组件去做这个变更。注意虽然我们不能直接修改一个传入的对象或者数组类型的prop，但是我们还是能够直接改内嵌的对象或属性。</li>
+</ol>
+<h1 id="Vue要做权限管理该怎么做？控制到按钮级别的权限怎么做？"><a href="#Vue要做权限管理该怎么做？控制到按钮级别的权限怎么做？" class="headerlink" title="Vue要做权限管理该怎么做？控制到按钮级别的权限怎么做？"></a>Vue要做权限管理该怎么做？控制到按钮级别的权限怎么做？</h1><h3 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h3><p>综合实践题目，实际开发中经常需要面临权限管理的需求，考查实际应用能力。</p>
+<p>权限管理一般需求是两个：页面权限和按钮权限，从这两个方面论述即可。</p>
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/a8d70aafa46e5ee1afca79506eff90acf3824c757ddb8118c8a90370543db99b/68747470733a2f2f747661312e73696e61696d672e636e2f6c617267652f65366339643234656c79316830776a7a69623478316a3231376b30736f3736782e6a7067"><img src="https://camo.githubusercontent.com/a8d70aafa46e5ee1afca79506eff90acf3824c757ddb8118c8a90370543db99b/68747470733a2f2f747661312e73696e61696d672e636e2f6c617267652f65366339643234656c79316830776a7a69623478316a3231376b30736f3736782e6a7067" alt="img"></a></p>
+<hr>
+<h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><ol>
+<li>权限管理需求分析：页面和按钮权限</li>
+<li>权限管理的实现方案：分后端方案和前端方案阐述</li>
+<li>说说各自的优缺点</li>
+</ol>
+<hr>
+<h3 id="回答范例-1"><a href="#回答范例-1" class="headerlink" title="回答范例"></a>回答范例</h3><ol>
+<li><p>权限管理一般需求是<strong>页面权限</strong>和<strong>按钮权限</strong>的管理</p>
+</li>
+<li><p>具体实现的时候分后端和前端两种方案：</p>
+<p>前端方案会<strong>把所有路由信息在前端配置</strong>，通过路由守卫要求用户登录，用户<strong>登录后根据角色过滤出路由表</strong>。比如我会配置一个<code>asyncRoutes</code>数组，需要认证的页面在其路由的<code>meta</code>中添加一个<code>roles</code>字段，等获取用户角色之后取两者的交集，若结果不为空则说明可以访问。此过滤过程结束，剩下的路由就是该用户能访问的页面，<strong>最后通过<code>router.addRoutes(accessRoutes)</code>方式动态添加路由</strong>即可。</p>
+<p>后端方案会<strong>把所有页面路由信息存在数据库</strong>中，用户登录的时候根据其角色<strong>查询得到其能访问的所有页面路由信息</strong>返回给前端，前端<strong>再通过<code>addRoutes</code>动态添加路由</strong>信息</p>
+<p>按钮权限的控制通常会<strong>实现一个指令</strong>，例如<code>v-permission</code>，<strong>将按钮要求角色通过值传给v-permission指令</strong>，在指令的<code>moutned</code>钩子中可以<strong>判断当前用户角色和按钮是否存在交集</strong>，有则保留按钮，无则移除按钮。</p>
+</li>
+<li><p>纯前端方案的优点是实现简单，不需要额外权限管理页面，但是维护起来问题比较大，有新的页面和角色需求就要修改前端代码重新打包部署；服务端方案就不存在这个问题，通过专门的角色和权限管理页面，配置页面和按钮权限信息到数据库，应用每次登陆时获取的都是最新的路由信息，可谓一劳永逸！</p>
+</li>
+</ol>
+<hr>
+<h3 id="知其所以然"><a href="#知其所以然" class="headerlink" title="知其所以然"></a>知其所以然</h3><p>路由守卫</p>
+<p><a target="_blank" rel="noopener" href="https://github1s.com/PanJiaChen/vue-element-admin/blob/HEAD/src/permission.js#L13-L14">https://github1s.com/PanJiaChen/vue-element-admin/blob/HEAD/src/permission.js#L13-L14</a></p>
+<p>路由生成</p>
+<p><a target="_blank" rel="noopener" href="https://github1s.com/PanJiaChen/vue-element-admin/blob/HEAD/src/store/modules/permission.js#L50-L51">https://github1s.com/PanJiaChen/vue-element-admin/blob/HEAD/src/store/modules/permission.js#L50-L51</a></p>
+<p>动态追加路由</p>
+<p><a target="_blank" rel="noopener" href="https://github1s.com/PanJiaChen/vue-element-admin/blob/HEAD/src/permission.js#L43-L44">https://github1s.com/PanJiaChen/vue-element-admin/blob/HEAD/src/permission.js#L43-L44</a></p>
+<hr>
+<h3 id="可能的追问"><a href="#可能的追问" class="headerlink" title="可能的追问"></a>可能的追问</h3><ol>
+<li><p>类似<code>Tabs</code>这类组件能不能使用<code>v-permission</code>指令实现按钮权限控制？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-tabs&gt; </span><br><span class="line">  &lt;el-tab-pane label=&quot;⽤户管理&quot; name=&quot;first&quot;&gt;⽤户管理&lt;/el-tab-pane&gt; </span><br><span class="line">	&lt;el-tab-pane label=&quot;⻆⾊管理&quot; name=&quot;third&quot;&gt;⻆⾊管理&lt;/el-tab-pane&gt;</span><br><span class="line">&lt;/el-tabs&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<ol>
+<li><p>服务端返回的路由信息如何添加到路由器中？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// 前端组件名和组件映射表</span><br><span class="line">const map = &#123;</span><br><span class="line">  //xx: require(&#x27;@/views/xx.vue&#x27;).default // 同步的⽅式</span><br><span class="line">  xx: () =&gt; import(&#x27;@/views/xx.vue&#x27;) // 异步的⽅式</span><br><span class="line">&#125;</span><br><span class="line">// 服务端返回的asyncRoutes</span><br><span class="line">const asyncRoutes = [</span><br><span class="line">  &#123; path: &#x27;/xx&#x27;, component: &#x27;xx&#x27;,... &#125;</span><br><span class="line">]</span><br><span class="line">// 遍历asyncRoutes，将component替换为map[component]</span><br><span class="line">function mapComponent(asyncRoutes) &#123;</span><br><span class="line">  asyncRoutes.forEach(route =&gt; &#123;</span><br><span class="line">    route.component = map[route.component];</span><br><span class="line">    if(route.children) &#123;</span><br><span class="line">      route.children.map(child =&gt; mapComponent(child))</span><br><span class="line">    &#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br><span class="line">mapComponent(asyncRoutes)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="vue响应式理解"><a href="#vue响应式理解" class="headerlink" title="vue响应式理解"></a>vue响应式理解</h1><h3 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h3><ul>
+<li><p>什么是响应式？</p>
+<blockquote>
+<p>所谓数据响应式就是能够使数据发生变化可以被检测并对这种变化做出响应式的机制。</p>
+</blockquote>
+</li>
+<li><p>为什么vue需要响应式？</p>
+<blockquote>
+<p>MVVM框架中要解决的一个核心问题就是连接数据层和视图层，通过数据驱动应用，数据变化，视图更新，要做到这点就需要对数据做响应式处理，这样一旦数据发生了变化就可以立即做出更新处理。</p>
+</blockquote>
+</li>
+<li><p>它能给我们带来什么好处？</p>
+<blockquote>
+<p> 以vue为例说明，通过数据响应式加上虚拟DOM和patch算法，开发人员只需要操作数据，关心业务，完全不用接触频繁的DOM操作，从而大大提升开发效率，降低开发难度。</p>
+</blockquote>
+</li>
+<li><p>vue的响应式是怎么实现的？有哪些优缺点？</p>
+<blockquote>
+<p> vue2中数据响应式会根据数据类型来做不同的处理，如果是对象则采用Object.defineProperty()的方式定义数据拦截，当数据被访问或发生变化时，我们感知并做出响应；如果是数组则通过覆盖数组对象原型的7个数组变更方法，使这些方法可以做额外的更新通知，从而做出响应。这种机制很好的解决了数据响应化的问题，但在实际使用中也存在一些缺点：比如初始化时需要递归遍历整个数据造成的性能损失；新增或删除属性时需要用户使用Vue.set&#x2F;delete这样特殊的api才生效；对于es6中新产生的Map、Set这些数据结构不支持等问题。</p>
+</blockquote>
+</li>
+<li><p>vue3中的响应式的新变化</p>
+<blockquote>
+<p>为了解决这些问题，vue3重新编写了这一部分的实现：利用ES6点Proxy代理要响应化的数据，它有很多好处，编程体验是一致的，不需要使用特殊的api，初始化和内存消耗都得到了大幅改善；另外由于响应化的实现代码抽取为独立的reactivity包，使我们可以更灵活的shying它，第三方的扩展开发起来更加灵活，缺点就是在兼容性上没有Object.defineProperty高，在一些考虑老设备的开发上需要关注这方面。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="相关源码"><a href="#相关源码" class="headerlink" title="相关源码"></a>相关源码</h3><p>vue2</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github1s.com/vuejs/vue/blob/HEAD/src/core/observer/index.ts#L135-L136">https://github1s.com/vuejs/vue/blob/HEAD/src/core/observer/index.ts#L135-L136</a></li>
+</ul>
+<p>vue3</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github1s.com/vuejs/core/blob/HEAD/packages/reactivity/src/reactive.ts#L89-L90">https://github1s.com/vuejs/core/blob/HEAD/packages/reactivity/src/reactive.ts#L89-L90</a></li>
+<li><a target="_blank" rel="noopener" href="https://github1s.com/vuejs/core/blob/HEAD/packages/reactivity/src/ref.ts#L67-L68">https://github1s.com/vuejs/core/blob/HEAD/packages/reactivity/src/ref.ts#L67-L68</a></li>
+</ul>
+</div><div class="article-licensing box"><div class="licensing-title"><p>vue面试题</p><p><a href="https://bobodog.cn/2022/06/20/vue面试题/">https://bobodog.cn/2022/06/20/vue面试题/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>IHuan123</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2022-06-20</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2022-07-07</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"></div><div style="display:flex;justify-content:space-between;align-items:center;"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/Vue/">Vue </a></div></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2022/07/09/js%E9%AB%98%E9%A2%91%E6%89%8B%E5%86%99%E5%AE%9E%E7%8E%B0/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">高频手写实现</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2022/04/14/tsconfig-json%E9%85%8D%E7%BD%AE%E8%AF%A6%E6%83%85/"><span class="level-item">tsconfig.json配置详情</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "d203260ec2a3faee2cd6f6ad1b8a4d86",
+            repo: "blog",
+            owner: "IHuan123",
+            clientID: "67c282af028dafe35991",
+            clientSecret: "c97915ab7ba1661603bf54146da66c41b8124014",
+            admin: ["IHuan123"],
+            createIssueManually: true,
+            distractionFreeMode: false,
+            perPage: 10,
+            pagerDirection: "last",
+            
+            
+            enableHotKey: true,
+            language: "zh-CN",
+        })
+        gitalk.render('comment-container')</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="https://avatars.githubusercontent.com/u/42716044?v=4" alt="wanghuan"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">wanghuan</p><p class="is-size-6 is-block">super_huan@outlook.com</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>成都</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">12</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">8</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">7</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/IHuan123" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/IHuan123"><i class="fab fa-github"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#props、methods、data、computed、watch初始化顺序"><span class="level-left"><span class="level-item">1</span><span class="level-item">props、methods、data、computed、watch初始化顺序</span></span></a></li><li><a class="level is-mobile" href="#v-if、v-for优先级"><span class="level-left"><span class="level-item">2</span><span class="level-item">v-if、v-for优先级</span></span></a></li><li><a class="level is-mobile" href="#Vue组件之间的通信"><span class="level-left"><span class="level-item">3</span><span class="level-item">Vue组件之间的通信</span></span></a></li><li><a class="level is-mobile" href="#Vue生命周期以及每个阶段做的事"><span class="level-left"><span class="level-item">4</span><span class="level-item">Vue生命周期以及每个阶段做的事</span></span></a></li><li><a class="level is-mobile" href="#双向绑定使用和原理"><span class="level-left"><span class="level-item">5</span><span class="level-item">双向绑定使用和原理</span></span></a></li><li><a class="level is-mobile" href="#Vue中如何扩展一个组件"><span class="level-left"><span class="level-item">6</span><span class="level-item">Vue中如何扩展一个组件</span></span></a></li><li><a class="level is-mobile" href="#子组件可以直接改变父组件的数据么"><span class="level-left"><span class="level-item">7</span><span class="level-item">子组件可以直接改变父组件的数据么?</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#回答范例"><span class="level-left"><span class="level-item">7.1</span><span class="level-item">回答范例</span></span></a></li></ul></li><li><a class="level is-mobile" href="#Vue要做权限管理该怎么做？控制到按钮级别的权限怎么做？"><span class="level-left"><span class="level-item">8</span><span class="level-item">Vue要做权限管理该怎么做？控制到按钮级别的权限怎么做？</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#可能的追问"><span class="level-left"><span class="level-item">8.1</span><span class="level-item">可能的追问</span></span></a></li></ul></li><li><a class="level is-mobile" href="#vue响应式理解"><span class="level-left"><span class="level-item">9</span><span class="level-item">vue响应式理解</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#相关源码"><span class="level-left"><span class="level-item">9.1</span><span class="level-item">相关源码</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer test-css"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="wanghuan" height="28"></a><p class="is-size-7"><span>&copy; 2022 IHuan123</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/IHuan123"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
