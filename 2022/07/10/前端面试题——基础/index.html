@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>前端面试题--基础 - wanghuan</title><link rel="manifest" href="/note/manifest.json"><meta name="application-name" content="wanghuan"><meta name="msapplication-TileImage" content="/img/logo.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="wanghuan"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Map和Set的区别，Map和Object的区别Map和Set的区别 Map是键值对，Set是值的集合，当然键和值可以是任何的值；  Map可以通过get方法获取值，而set不能因为它只有值；  都能通过迭代器进行for…of遍历；  Set的值是唯一的可以做数组去重，Map由于没有格式限制，可以做数据存储  map和set都是stl中的关联容器，map以键值对的形式存储，key&amp;#x3D;val"><meta property="og:type" content="blog"><meta property="og:title" content="前端面试题--基础"><meta property="og:url" content="https://ihuan123.github.io/note/2022/07/10/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E2%80%94%E2%80%94%E5%9F%BA%E7%A1%80/"><meta property="og:site_name" content="wanghuan"><meta property="og:description" content="Map和Set的区别，Map和Object的区别Map和Set的区别 Map是键值对，Set是值的集合，当然键和值可以是任何的值；  Map可以通过get方法获取值，而set不能因为它只有值；  都能通过迭代器进行for…of遍历；  Set的值是唯一的可以做数组去重，Map由于没有格式限制，可以做数据存储  map和set都是stl中的关联容器，map以键值对的形式存储，key&amp;#x3D;val"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/4/16/16a2654b0dd928ef~tplv-t2oaga2asx-zoom-in-crop-mark:3024:0:0:0.awebp"><meta property="og:image" content="https://raw.githubusercontent.com/LuckyWinty/blog/master/images/broswer/url.png"><meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/476218fe8ac54be9addf17812ada3e21~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"><meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/60224199bf4f481caa505e6de7ee46fa~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"><meta property="article:published_time" content="2022-07-10T13:55:00.000Z"><meta property="article:modified_time" content="2024-11-18T01:33:55.858Z"><meta property="article:author" content="wanghuan"><meta property="article:tag" content="JavaScript"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/4/16/16a2654b0dd928ef~tplv-t2oaga2asx-zoom-in-crop-mark:3024:0:0:0.awebp"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://ihuan123.github.io/note/2022/07/10/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E2%80%94%E2%80%94%E5%9F%BA%E7%A1%80/"},"headline":"前端面试题--基础","image":["https://raw.githubusercontent.com/LuckyWinty/blog/master/images/broswer/url.png"],"datePublished":"2022-07-10T13:55:00.000Z","dateModified":"2024-11-18T01:33:55.858Z","author":{"@type":"Person","name":"IHuan123"},"publisher":{"@type":"Organization","name":"wanghuan","logo":{"@type":"ImageObject","url":"https://ihuan123.github.io/img/logo.svg"}},"description":"Map和Set的区别，Map和Object的区别Map和Set的区别 Map是键值对，Set是值的集合，当然键和值可以是任何的值；  Map可以通过get方法获取值，而set不能因为它只有值；  都能通过迭代器进行for…of遍历；  Set的值是唯一的可以做数组去重，Map由于没有格式限制，可以做数据存储  map和set都是stl中的关联容器，map以键值对的形式存储，key&#x3D;val"}</script><link rel="canonical" href="https://ihuan123.github.io/note/2022/07/10/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E2%80%94%E2%80%94%E5%9F%BA%E7%A1%80/"><link rel="icon" href="/note/img/logo.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/note/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+          Array
+              .from(document.querySelectorAll('.tab-content'))
+              .forEach($tab => {
+                  $tab.classList.add('is-hidden');
+              });
+          Array
+              .from(document.querySelectorAll('.tabs li'))
+              .forEach($tab => {
+                  $tab.classList.remove('is-active');
+              });
+          const $activeTab = document.querySelector(location.hash);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+          const $tabMenu = document.querySelector(`a[href="${location.hash}"]`);
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/note/"><img src="/note/img/logo.svg" alt="wanghuan" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/note/">首页</a><a class="navbar-item" href="/note/archives">归档</a><a class="navbar-item" href="/note/categories">目录</a><a class="navbar-item" href="/note/tags">标签</a><a class="navbar-item" href="/note/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/IHuan123"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal"><i class="fas fa-angle-double-right"></i>前端面试题--基础</h1><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-07-10T13:55:00.000Z" title="2022/7/10 21:55:00">2022-07-10</time>发表</span><span class="level-item"><time dateTime="2024-11-18T01:33:55.858Z" title="2024/11/18 09:33:55">2024-11-18</time>更新</span><span class="level-item"><a class="link-muted" href="/note/categories/JavaScript/">JavaScript</a></span><span class="level-item">1 小时读完 (大约7126个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><div class="content"><h1 id="Map和Set的区别，Map和Object的区别"><a href="#Map和Set的区别，Map和Object的区别" class="headerlink" title="Map和Set的区别，Map和Object的区别"></a>Map和Set的区别，Map和Object的区别</h1><h2 id="Map和Set的区别"><a href="#Map和Set的区别" class="headerlink" title="Map和Set的区别"></a>Map和Set的区别</h2><ul>
+<li><p>Map是键值对，Set是值的<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E9%9B%86%E5%90%88&spm=1001.2101.3001.7020">集合</a>，<strong>当然键和值可以是任何的值</strong>；</p>
+</li>
+<li><p>Map可以通过get方法获取值，而set不能因为它只有值；</p>
+</li>
+<li><p>都能通过迭代器进行for…of遍历；</p>
+</li>
+<li><p>Set的值是唯一的可以做数组去重，Map由于没有格式限制，可以做数据存储</p>
+</li>
+<li><p>map和set都是stl中的关联容器，map以键值对的形式存储，key&#x3D;value组成pair，是一组映射关系。set只有值，可以认为只有一个数据，并且set中元素不可以重复且自动排序。</p>
+<span id="more"></span></li>
+</ul>
+<h2 id="Objects-和-maps-的比较"><a href="#Objects-和-maps-的比较" class="headerlink" title="Objects 和 maps 的比较"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Map#objects_%E5%92%8C_maps_%E7%9A%84%E6%AF%94%E8%BE%83">Objects 和 maps 的比较</a></h2><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object"><code>Object</code></a> 和 <code>Map</code> 类似的是，它们都允许你按键存取一个值、删除键、检测一个键是否绑定了值。因此（并且也没有其他内建的替代方式了）过去我们一直都把对象当成 <code>Map</code> 使用。</p>
+<p>不过 <code>Map</code> 和 <code>Object</code> 有一些重要的区别，在下列情况中使用 <code>Map</code> 会是更好的选择：</p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">Map</th>
+<th align="left">Object</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">意外的键</td>
+<td align="left"><code>Map</code> 默认情况不包含任何键。只包含显式插入的键。</td>
+<td align="left">一个 <code>Object</code> 有一个原型，原型链上的键名有可能和你自己在对象上的设置的键名产生冲突。<strong>备注：</strong>虽然从 ES5 开始可以用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create"><code>Object.create(null)</code></a> 来创建一个没有原型的对象，但是这种用法不太常见。</td>
+</tr>
+<tr>
+<td align="left">键的类型</td>
+<td align="left">一个 <code>Map</code> 的键可以是<strong>任意值</strong>，包括函数、对象或任意基本类型。</td>
+<td align="left">一个 <code>Object</code> 的键必须是一个 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String"><code>String</code></a> 或是 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Symbol"><code>Symbol</code></a>。</td>
+</tr>
+<tr>
+<td align="left">键的顺序</td>
+<td align="left"><code>Map</code> 中的键是有序的。因此，当迭代的时候，一个 <code>Map</code> 对象以插入的顺序返回键值。</td>
+<td align="left">虽然 <code>Object</code> 的键目前是有序的，但并不总是这样，而且这个顺序是复杂的。因此，最好不要依赖属性的顺序。自 ECMAScript 2015 规范以来，对象的属性被定义为是有序的；ECMAScript 2020 则额外定义了继承属性的顺序。参见 <a target="_blank" rel="noopener" href="https://tc39.es/ecma262/#sec-ordinaryownpropertykeys">OrdinaryOwnPropertyKeys</a> 和 <a target="_blank" rel="noopener" href="https://tc39.es/ecma262/#sec-enumerate-object-properties">EnumerateObjectProperties</a> 抽象规范说明。但是，请注意没有可以迭代对象所有属性的机制，每一种机制只包含了属性的不同子集。（<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...in"><code>for-in</code></a> 仅包含了以字符串为键的属性；<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/keys"><code>Object.keys</code></a> 仅包含了对象自身的、可枚举的、以字符串为键的属性；<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyNames"><code>Object.getOwnPropertyNames</code></a> 包含了所有以字符串为键的属性，即使是不可枚举的；<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertySymbols"><code>Object.getOwnPropertySymbols</code></a> 与前者类似，但其包含的是以 <code>Symbol</code> 为键的属性，等等。）</td>
+</tr>
+<tr>
+<td align="left">Size</td>
+<td align="left"><code>Map</code> 的键值对个数可以轻易地通过 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Map/size"><code>size</code></a> 属性获取。</td>
+<td align="left"><code>Object</code> 的键值对个数只能手动计算.</td>
+</tr>
+<tr>
+<td align="left">迭代</td>
+<td align="left"><code>Map</code> 是 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Iteration_protocols">可迭代的</a> 的，所以可以直接被迭代。</td>
+<td align="left"><code>Object</code> 没有实现 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Iteration_protocols#the_iterable_protocol">迭代协议</a>，所以使用 JavaSctipt 的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...of">for…of</a> 表达式并不能直接迭代对象。<strong>备注：</strong>对象可以实现迭代协议，或者你可以使用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/keys"><code>Object.keys</code></a> 或 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/entries"><code>Object.entries</code></a>。<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...in">for…in</a> 表达式允许你迭代一个对象的<em>可枚举</em>属性。</td>
+</tr>
+<tr>
+<td align="left">性能</td>
+<td align="left">在频繁增删键值对的场景下表现更好。</td>
+<td align="left">在频繁添加和删除键值对的场景下未作出优化。</td>
+</tr>
+<tr>
+<td align="left">序列化和解析</td>
+<td align="left">没有元素的序列化和解析的支持。（但是你可以使用携带 <em>replacer</em> 参数的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify"><code>JSON.stringify()</code></a> 创建一个自己的对 <code>Map</code> 的序列化和解析支持。参见 Stack Overflow 上的提问：<a target="_blank" rel="noopener" href="https://stackoverflow.com/q/29085197/">How do you JSON.stringify an ES6 Map?</a>）</td>
+<td align="left">原生的由 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object"><code>Object</code></a> 到 JSON 的序列化支持，使用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify"><code>JSON.stringify()</code></a>。原生的由 JSON 到 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object"><code>Object</code></a> 的解析支持，使用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse"><code>JSON.parse()</code></a>。</td>
+</tr>
+</tbody></table>
+<h1 id="数组的filter、every、flat的作用"><a href="#数组的filter、every、flat的作用" class="headerlink" title="数组的filter、every、flat的作用"></a>数组的filter、every、flat的作用</h1><h2 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> newArray = arr.<span class="title function_">filter</span>(<span class="title function_">callback</span>(element[, index[, array]])[, thisArg])</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#%E5%8F%82%E6%95%B0">参数</a></h3><ul>
+<li><p><code>callback</code></p>
+<p>用来测试数组的每个元素的函数。返回 <code>true</code> 表示该元素通过测试，保留该元素，<code>false</code> 则不保留。它接受以下三个参数：<code>element</code>数组中当前正在处理的元素。<code>index</code>可选正在处理的元素在数组中的索引。<code>array</code>可选调用了 <code>filter</code> 的数组本身。</p>
+</li>
+<li><p><code>thisArg</code>可选</p>
+<p>执行 <code>callback</code> 时，用于 <code>this</code> 的值。</p>
+</li>
+</ul>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#%E8%BF%94%E5%9B%9E%E5%80%BC">返回值</a></h3><p>一个新的、由通过测试的元素组成的数组，如果没有任何数组元素通过测试，则返回空数组。</p>
+<h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#%E6%8F%8F%E8%BF%B0">描述</a></h3><p><code>filter</code> 为数组中的每个元素调用一次 <code>callback</code> 函数，并利用所有使得 <code>callback</code> 返回 true 或<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/Truthy">等价于 true 的值</a>的元素创建一个新数组。<code>callback</code> 只会在已经赋值的索引上被调用，对于那些已经被删除或者从未被赋值的索引不会被调用。那些没有通过 <code>callback</code> 测试的元素会被跳过，不会被包含在新数组中。</p>
+<p><code>callback</code> 被调用时传入三个参数：</p>
+<ol>
+<li>元素的值</li>
+<li>元素的索引</li>
+<li>被遍历的数组本身</li>
+</ol>
+<p>如果为 <code>filter</code> 提供一个 <code>thisArg</code> 参数，则它会被作为 <code>callback</code> 被调用时的 <code>this</code> 值。否则，<code>callback</code> 的 <code>this</code> 值在非严格模式下将是全局对象，严格模式下为 <code>undefined</code>。<code>callback</code> 函数最终观察到的 <code>this</code> 值是根据<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/this">通常函数所看到的 “this”的规则</a>确定的。</p>
+<p><code>filter</code> 不会改变原数组，它返回过滤后的新数组。</p>
+<p><code>filter</code> 遍历的元素范围在第一次调用 <code>callback</code> 之前就已经确定了。在调用 <code>filter</code> 之后被添加到数组中的元素不会被 <code>filter</code> 遍历到。如果已经存在的元素被改变了，则他们传入 <code>callback</code> 的值是 <code>filter</code> 遍历到它们那一刻的值。被删除或从来未被赋值的元素不会被遍历到。</p>
+<h2 id="every"><a href="#every" class="headerlink" title="every"></a>every</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.<span class="title function_">every</span>(<span class="title function_">callback</span>(element[, index[, array]])[, thisArg])</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数-1"><a href="#参数-1" class="headerlink" title="参数"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/every#%E5%8F%82%E6%95%B0">参数</a></h3><ul>
+<li><p><code>callback</code></p>
+<p>用来测试每个元素的函数，它可以接收三个参数：<code>element</code>用于测试的当前值。<code>index</code>可选用于测试的当前值的索引。<code>array</code>可选调用 <code>every</code> 的当前数组。</p>
+</li>
+<li><p><code>thisArg</code></p>
+<p>执行 <code>callback</code> 时使用的 <code>this</code> 值。</p>
+</li>
+</ul>
+<h3 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/every#%E8%BF%94%E5%9B%9E%E5%80%BC">返回值</a></h3><p>如果回调函数的每一次返回都为 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/Truthy">truthy</a> 值，返回 <code>true</code>，否则返回 <code>false</code>。</p>
+<h3 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/every#%E6%8F%8F%E8%BF%B0">描述</a></h3><p><code>every</code> 方法为数组中的每个元素执行一次 <code>callback</code> 函数，直到它找到一个会使 <code>callback</code> 返回 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/Falsy">falsy</a> 的元素。如果发现了一个这样的元素，<code>every</code> 方法将会立即返回 <code>false</code>。否则，<code>callback</code> 为每一个元素返回 <code>true</code>，<code>every</code> 就会返回 <code>true</code>。<code>callback</code> 只会为那些已经被赋值的索引调用。不会为那些被删除或从未被赋值的索引调用。</p>
+<p><code>callback</code> 在被调用时可传入三个参数：元素值，元素的索引，原数组。</p>
+<p>如果为 <code>every</code> 提供一个 <code>thisArg</code> 参数，则该参数为调用 <code>callback</code> 时的 <code>this</code> 值。如果省略该参数，则 <code>callback</code> 被调用时的 <code>this</code> 值，在非严格模式下为全局对象，在严格模式下传入 <code>undefined</code>。详见 <code>this</code> 条目。</p>
+<p><code>every</code> 不会改变原数组。</p>
+<p><code>every</code> 遍历的元素范围在第一次调用 <code>callback</code> 之前就已确定了。在调用 <code>every</code> 之后添加到数组中的元素不会被 <code>callback</code> 访问到。如果数组中存在的元素被更改，则他们传入 <code>callback</code> 的值是 <code>every</code> 访问到他们那一刻的值。那些被删除的元素或从来未被赋值的元素将不会被访问到。</p>
+<p><code>every</code> 和数学中的”所有”类似，当所有的元素都符合条件才会返回 <code>true</code>。正因如此，若传入一个空数组，无论如何都会返回 <code>true</code>。（这种情况属于<a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Vacuous_truth">无条件正确</a>：正因为一个<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Empty_set#Properties">空集合</a>没有元素，所以它其中的所有元素都符合给定的条件。)</p>
+<h2 id="flat"><a href="#flat" class="headerlink" title="flat"></a>flat</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> newArray = arr.<span class="title function_">flat</span>([depth])</span><br></pre></td></tr></table></figure>
+
+<p>主要用于扁平化多维数组，<code>flat() </code> 方法会按照一个可指定的深度递归遍历数组，并将所有元素与遍历到的子数组中的元素合并为一个新数组返回。</p>
+<h1 id="ES6十大特性"><a href="#ES6十大特性" class="headerlink" title="ES6十大特性"></a>ES6十大特性</h1><ol>
+<li>Default Parameters（默认参数） in ES6</li>
+<li>Template Literals （模板文本）in ES6</li>
+<li>Multi-line Strings （多行字符串）in ES6</li>
+<li>Destructuring Assignment （解构赋值）in ES6</li>
+<li>Enhanced Object Literals （增强的对象文本）in ES6</li>
+<li>Arrow Functions （箭头函数）in ES6</li>
+<li>Promises in ES6</li>
+<li>Block-Scoped Constructs Let and Const（块作用域构造 let 、 const）</li>
+<li>Classes（类） in ES6</li>
+<li>Modules（模块） in ES6</li>
+</ol>
+<h1 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h1><h2 id="Promise-x2F-A-规范"><a href="#Promise-x2F-A-规范" class="headerlink" title="Promise&#x2F;A+ 规范"></a>Promise&#x2F;A+ 规范</h2><p>Promise规范有很多，如Promise&#x2F;A，Promise&#x2F;B，Promise&#x2F;D 以及 Promise&#x2F;A 的升级版Promise&#x2F;A+，因为ES6主要用的是Promise&#x2F;A+规范，该规范内容也比较多，我们挑几个简单的说明下:</p>
+<ol>
+<li>Promise本身是一个状态机，每一个Promise实例只能有三个状态，<code>pending</code>、<code>fulfilled</code>、<code>reject</code>，状态之间的转化只能是<code>pending-&gt;fulfilled</code>、<code>pending-&gt;reject</code>，状态变化不可逆。</li>
+<li>Promise有一个<code>then</code>方法，该方法可以被调用多次，并且返回一个Promise对象（返回新的Promise还是老的Promise对象，规范没有提）。</li>
+<li>支持链式调用。</li>
+<li>内部保存有一个value值，用来保存上次执行的结果值，如果报错，则保存的是异常信息。</li>
+</ol>
+<h1 id="Promise的all和race有什么区别"><a href="#Promise的all和race有什么区别" class="headerlink" title="Promise的all和race有什么区别"></a>Promise的all和race有什么区别</h1><h2 id="Promise-all"><a href="#Promise-all" class="headerlink" title="Promise.all"></a>Promise.all</h2><p>Promise.all() 方法接收一个 promise 的 iterable 类型（注：Array，Map，Set 都属于 ES6 的 iterable 类型）的输入，并且只返回一个<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise"><code>Promise</code></a>实例， 那个输入的所有 promise 的 resolve 回调的结果是一个数组。这个<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise"><code>Promise</code></a>的 resolve 回调执行是在所有输入的 promise 的 resolve 回调都结束，或者输入的 iterable 里没有 promise 了的时候。它的 reject 回调执行是，只要任何一个输入的 promise 的 reject 回调执行或者输入不合法的 promise 就会立即抛出错误，并且 reject 的是第一个抛出的错误信息。</p>
+<h3 id="完成（Fulfillment）："><a href="#完成（Fulfillment）：" class="headerlink" title="完成（Fulfillment）："></a>完成（Fulfillment）：</h3><p>如果传入的可迭代对象为空，<code>Promise.all</code> 会同步地返回一个已完成（resolved）状态的<code>promise</code>。<br>如果所有传入的 <code>promise</code> 都变为完成状态，或者传入的可迭代对象内没有 <code>promise</code>，<code>Promise.all</code> 返回的 <code>promise</code> 异步地变为完成。<br>在任何情况下，<code>Promise.all</code> 返回的 <code>promise</code> 的完成状态的结果都是一个数组，它包含所有的传入迭代参数对象的值（也包括非 <code>promise</code> 值）。</p>
+<h3 id="失败-x2F-拒绝（Rejection）："><a href="#失败-x2F-拒绝（Rejection）：" class="headerlink" title="失败&#x2F;拒绝（Rejection）："></a>失败&#x2F;拒绝（Rejection）：</h3><p>如果传入的 <code>promise</code> 中有一个失败（rejected），<code>Promise.all</code> 异步地将失败的那个结果给失败状态的回调函数，而不管其它 <code>promise</code> 是否完成。</p>
+<h2 id="Promise-race"><a href="#Promise-race" class="headerlink" title="Promise.race"></a>Promise.race</h2><p><strong><code>Promise.race(iterable)</code></strong> 方法返回一个 promise，一旦迭代器中的某个 promise 解决或拒绝，返回的 promise 就会解决或拒绝。</p>
+<h3 id="描述-2"><a href="#描述-2" class="headerlink" title="描述"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/race#description">描述</a></h3><p><code>race</code> 函数返回一个 <code>Promise</code>，它将与第一个传递的 promise 相同的完成方式被完成。它可以是完成（ resolves），也可以是失败（rejects），这要取决于第一个完成的方式是两个中的哪个。</p>
+<p>如果传的迭代是空的，则返回的 promise 将永远等待。</p>
+<p>如果迭代包含一个或多个非承诺值和&#x2F;或已解决&#x2F;拒绝的承诺，则<code> Promise.race</code> 将解析为迭代中找到的第一个值。</p>
+<h1 id="var、let、const区别"><a href="#var、let、const区别" class="headerlink" title="var、let、const区别"></a>var、let、const区别</h1><h2 id="var"><a href="#var" class="headerlink" title="var"></a>var</h2><p><strong><code>var</code> 语句</strong> 用于声明一个函数范围或全局范围的变量，并可将其初始化为一个值（可选）。</p>
+<p>无论在何处声明变量，都会在执行任何代码之前进行处理。这被称为<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/Hoisting">变量提升</a>，我们将在下面进一步讨论。</p>
+<p>用 <code>var</code> 声明的变量的作用域是它当前的执行上下文及其闭包（嵌套函数），或者对于声明在任何函数外的变量来说是全局。使用 <code>var</code> 重复声明 JavaScript 变量并不会抛出错误（即使在严格模式 (strict mode) 下），同时，变量也不会丢失其值，直到调用其它的赋值操作。</p>
+<h2 id="let"><a href="#let" class="headerlink" title="let"></a>let</h2><p><strong><code>let</code></strong> 允许你声明一个作用域被限制在<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/block"><code>块</code></a>作用域中的变量、语句或者表达式。与 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/var"><code>var</code></a> 关键字不同的是，<code>var</code> 声明的变量作用域是全局或者整个函数块的。 <code>var</code> 和 <code>let</code> 的另一个重要区别，<code>let</code> 声明的变量不会在作用域中被提升，它是在编译时才初始化（参考下面 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/let#%E6%9A%82%E6%97%B6%E6%80%A7%E6%AD%BB%E5%8C%BA">暂时性死区</a>）。</p>
+<p>就像 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/const#%E6%8F%8F%E8%BF%B0"><code>const</code></a> 一样，<code>let</code> 不会在全局声明时（在最顶部的范围）创建 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window"><code>window</code></a> 对象的属性。</p>
+<h3 id="暂时性死区"><a href="#暂时性死区" class="headerlink" title="暂时性死区"></a>暂时性死区</h3><p><code>let</code> 变量在声明之前，不能够读写。如果声明中未指定初始值，则变量将使用 <code>undefined</code> 值初始化，在声明之前访问变量会导致 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError"><code>ReferenceError</code></a>。</p>
+<p><strong>备注：</strong> 与 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/var#%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87"><code>var</code></a> 变量不同，如果在声明前使用 <code>var</code>，变量将会被初始化为<code>undefined</code>。</p>
+<p>从块作用域的顶部一直到变量声明完成之前，这个变量处在暂时性死区（TDZ，temporal dead zone）。</p>
+<h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><p>此声明创建一个常量，其作用域可以是全局或本地声明的块。 与<code>var</code>变量不同，全局常量不会变为 window 对象的属性。需要一个常数的初始化器；也就是说，您必须在声明的同一语句中指定它的值（这是有道理的，因为以后不能更改）。</p>
+<p>**<code>const</code>**声明创建一个值的只读引用。但这并不意味着它所持有的值是不可变的，只是变量标识符不能重新分配。例如，在引用内容是对象的情况下，这意味着可以改变对象的内容（例如，其参数）。</p>
+<p>关于“<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/let#temporal_dead_zone_and_errors_with_let">暂存死区</a>”的所有讨论都适用于<code>let</code>和<code>const</code>。</p>
+<p>一个常量不能和它所在作用域内的其他变量或函数拥有相同的名称。</p>
+<h4 id="如果希望const定义的对象的属性也不能被修改该怎么做？"><a href="#如果希望const定义的对象的属性也不能被修改该怎么做？" class="headerlink" title="如果希望const定义的对象的属性也不能被修改该怎么做？"></a>如果希望const定义的对象的属性也不能被修改该怎么做？</h4><p>使用Object.freeze(obj)冻结obj，就能使其内部的属性不可变，但有局限，就是obj对象中要是有属性是对象，该对象内属性还能改变，要全不可变的话，就需要使用递归等方式一层一层全部冻结。</p>
+<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><ul>
+<li>1、<code>闭包</code>是在<code>函数创建</code>时创建的，即有<code>函数创建就会生成闭包</code>；</li>
+<li>2、<code>闭包</code>和<code>其函数</code>在<code>同一上下文中</code>；</li>
+<li>3、<code>闭包包含该作用域下的所有变量/引用地址</code>；</li>
+<li>4、<code>定义函数不会创建闭包</code>，只有创建&#x2F;执行函数同时才创建闭包；</li>
+</ul>
+<h1 id="BFC"><a href="#BFC" class="headerlink" title="BFC"></a>BFC</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p> BFC 即 Block Formatting Contexts (块级格式化上下文)，它属于上述布局模式的流动模型。是W3C CSS2.1规范中的一个概念，决定了元素如何对其内容进行定位，以及与其他元素的关系和相互作用。具有BFC特性的元素可以看做是隔离了的独立容器，容器里面的元素不会在布局上影响到外面的元素，并且BFC具有普通容器所没有的的一些特性。通俗一点来讲，可以把BFC理解为一个封闭的大箱子，箱子内部的元素无论如何翻江倒海，都不会影响到外部。</p>
+<h2 id="形成BFC的条件"><a href="#形成BFC的条件" class="headerlink" title="形成BFC的条件"></a><strong>形成BFC的条件</strong></h2><p>只要元素满足下面任一条件即可触发BFC特性：<br>body 根元素<br>浮动元素：float 除 none 以外的值<br>绝对定位元素：position (absolute、fixed)<br>display 为 inline-block、table-cells、flex<br>overflow 除了 visible 以外的值 (hidden、auto、scroll)</p>
+<h2 id="BFC常见作用"><a href="#BFC常见作用" class="headerlink" title="BFC常见作用"></a><strong>BFC常见作用</strong></h2><ul>
+<li>阻止外边距折叠</li>
+<li>解决float浮动导致的高度塌陷，元素被浮动元素覆盖</li>
+</ul>
+<h1 id="事件冒泡和事件捕获"><a href="#事件冒泡和事件捕获" class="headerlink" title="事件冒泡和事件捕获"></a>事件冒泡和事件捕获</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;outer&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">&quot;inner&quot;</span>&gt;</span>Click me!<span class="tag">&lt;/<span class="name">p</span>&gt;</span> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="事件冒泡"><a href="#事件冒泡" class="headerlink" title="事件冒泡"></a>事件冒泡</h2><p>微软提出了名为<strong>事件冒泡</strong>(event bubbling)的事件流。事件冒泡可以形象地比喻为把一颗石头投入水中，泡泡会一直从水底冒出水面。也就是说，事件会从最内层的元素开始发生，一直向上传播，直到document对象。</p>
+<p>因此上面的例子在事件冒泡的概念下发生click事件的顺序应该是</p>
+<p>p -&gt; div -&gt; body -&gt; html -&gt; document</p>
+<h2 id="事件捕获"><a href="#事件捕获" class="headerlink" title="事件捕获"></a>事件捕获</h2><p>网景提出另一种事件流名为<strong>事件捕获</strong>(event capturing)。与事件冒泡相反，事件会从最外层开始发生，直到最具体的元素。</p>
+<p>上面的例子在事件捕获的概念下发生click事件的顺序应该是</p>
+<p><strong>document -&gt; html -&gt; body -&gt; div -&gt; p</strong></p>
+<p><strong>事件冒泡和事件捕获过程图：</strong></p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/4/16/16a2654b0dd928ef~tplv-t2oaga2asx-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
+<p>1-5是捕获过程，5-6是目标阶段，6-10是冒泡阶段；</p>
+<h2 id="addEventListener-的第三个参数"><a href="#addEventListener-的第三个参数" class="headerlink" title="addEventListener 的第三个参数"></a>addEventListener 的第三个参数</h2><p>DOM2级事件”中规定的事件流同时支持了事件捕获阶段和事件冒泡阶段，而作为开发者，我们可以选择事件处理函数在哪一个阶段被调用。</p>
+<p>addEventListener方法用来为一个特定的元素绑定一个事件处理函数，是JavaScript中的常用方法。addEventListener有三个参数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.addEventListener(event, function, useCapture)</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>event</td>
+<td>必须。字符串，指定事件名。  <strong>注意:</strong> 不要使用 “on” 前缀。 例如，使用 “click” ,而不是使用 “onclick”。   <strong>提示：</strong> 所有 HTML DOM 事件，可以查看我们完整的 <a href="https://link.juejin.cn/?target=http://www.runoob.com/jsref/dom-obj-event.html">HTML DOM Event 对象参考手册</a>。</td>
+</tr>
+<tr>
+<td>function</td>
+<td>必须。指定要事件触发时执行的函数。   当事件对象会作为第一个参数传入函数。 事件对象的类型取决于特定的事件。例如， “click” 事件属于 MouseEvent(鼠标事件) 对象。</td>
+</tr>
+<tr>
+<td>useCapture</td>
+<td>可选。布尔值，指定事件是否在捕获或冒泡阶段执行。  可能值:true - 事件句柄在捕获阶段执行（即在事件捕获阶段调用处理函数）false- false- 默认。事件句柄在冒泡阶段执行（即表示在事件冒泡的阶段调用事件处理函数）</td>
+</tr>
+</tbody></table>
+<h1 id="浏览器输入URL后发生了什么"><a href="#浏览器输入URL后发生了什么" class="headerlink" title="浏览器输入URL后发生了什么"></a>浏览器输入URL后发生了什么</h1><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904054074654728#heading-5">参考地址</a></p>
+<p><img src="https://raw.githubusercontent.com/LuckyWinty/blog/master/images/broswer/url.png" alt="流程图"></p>
+<h1 id="谈谈-HTTPS"><a href="#谈谈-HTTPS" class="headerlink" title="谈谈 HTTPS"></a>谈谈 HTTPS</h1><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903504046211079">https://juejin.cn/post/6844903504046211079</a></p>
+<h1 id="谈谈前端的安全知识？XSS、CSRF，以及如何防范。"><a href="#谈谈前端的安全知识？XSS、CSRF，以及如何防范。" class="headerlink" title="谈谈前端的安全知识？XSS、CSRF，以及如何防范。"></a>谈谈前端的安全知识？XSS、CSRF，以及如何防范。</h1><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903842635579405">寒冬求职之你必须要懂的Web安全</a></p>
+<h2 id="问：new-一个构造函数，如果函数返回-return-、-return-null-，-return-1-，-return-true-会发生什么情况？"><a href="#问：new-一个构造函数，如果函数返回-return-、-return-null-，-return-1-，-return-true-会发生什么情况？" class="headerlink" title="问：new 一个构造函数，如果函数返回 return {} 、 return null ， return 1 ， return true 会发生什么情况？"></a>问：new 一个构造函数，如果函数返回 <code>return &#123;&#125;</code> 、 <code>return null</code> ， <code>return 1</code> ， <code>return true</code> 会发生什么情况？</h2><p>如果函数返回一个对象，那么new 这个函数调用返回这个函数的返回对象，否则返回 new 创建的新对象</p>
+<h1 id="什么是作用域？"><a href="#什么是作用域？" class="headerlink" title="什么是作用域？"></a>什么是作用域？</h1><p>ES5 中只存在两种作用域：全局作用域和函数作用域。在 JavaScript 中，我们将作用域定义为一套规则，这套规则用来管理引擎如何在当前作用域以及嵌套子作用域中根据标识符名称进行变量（变量名或者函数名）查找</p>
+<h1 id="什么是作用域链？"><a href="#什么是作用域链？" class="headerlink" title="什么是作用域链？"></a>什么是作用域链？</h1><p>首先要了解作用域链，当访问一个变量时，编译器在执行这段代码时，会首先从当前的作用域中查找是否有这个标识符，如果没有找到，就会去父作用域查找，如果父作用域还没找到继续向上查找，直到全局作用域为止,，而作用域链，就是有当前作用域与上层作用域的一系列变量对象组成，它保证了当前执行的作用域对符合访问权限的变量和函数的有序访问。</p>
+<h1 id="JS-隐式转换，显示转换"><a href="#JS-隐式转换，显示转换" class="headerlink" title="JS 隐式转换，显示转换"></a>JS 隐式转换，显示转换</h1><p>一般非基础类型进行转换时会先调用 valueOf，如果 valueOf 无法返回基本类型值，就会调用 toString</p>
+<h1 id="JS-数据类型"><a href="#JS-数据类型" class="headerlink" title="JS 数据类型"></a>JS 数据类型</h1><ul>
+<li><p>基本类型：Number、Boolean、String、null、undefined、symbol（ES6 新增的），BigInt（ES2020） </p>
+</li>
+<li><p>引用类型：Object，对象子类型（Array，Function）</p>
+</li>
+</ul>
+<h1 id="Number-的存储空间是多大？如果后台发送了一个超过最大自己的数字怎么办"><a href="#Number-的存储空间是多大？如果后台发送了一个超过最大自己的数字怎么办" class="headerlink" title="Number() 的存储空间是多大？如果后台发送了一个超过最大自己的数字怎么办"></a>Number() 的存储空间是多大？如果后台发送了一个超过最大自己的数字怎么办</h1><p>Math.pow(2, 53) ，53 为有效数字，会发生截断，等于 JS 能支持的最大数字。</p>
+<h1 id="原型与原型链"><a href="#原型与原型链" class="headerlink" title="原型与原型链"></a>原型与原型链</h1><p><strong>什么是原型链？</strong></p>
+<p>当对象查找一个属性的时候，如果没有在自身找到，那么就会查找自身的原型，如果原型还没有找到，那么会继续查找原型的原型，直到找到 Object.prototype 的原型时，此时原型为 null，查找停止。 这种通过 通过原型链接的逐级向上的查找链被称为原型链</p>
+<p><strong>什么是原型继承？</strong></p>
+<p>一个对象可以使用另外一个对象的属性或者方法，就称之为继承。具体是通过将这个对象的原型设置为另外一个对象，这样根据原型链的规则，如果查找一个对象属性且在自身不存在时，就会查找另外一个对象，相当于一个对象可以使用另外一个对象的属性和方法了。</p>
+<h1 id="如果一个构造函数，bind了一个对象，用这个构造函数创建出的实例会继承这个对象的属性吗？为什么？"><a href="#如果一个构造函数，bind了一个对象，用这个构造函数创建出的实例会继承这个对象的属性吗？为什么？" class="headerlink" title="如果一个构造函数，bind了一个对象，用这个构造函数创建出的实例会继承这个对象的属性吗？为什么？"></a>如果一个构造函数，bind了一个对象，用这个构造函数创建出的实例会继承这个对象的属性吗？为什么？</h1><p>不会继承，因为根据 this 绑定四大规则，new 绑定的优先级高于 bind 显示绑定，通过 new 进行构造函数调用时，会创建一个新对象，这个新对象会代替 bind 的对象绑定，作为此函数的 this，并且在此函数没有返回对象的情况下，返回这个新建的对象</p>
+<h1 id="浏览器跨域以及解决方法"><a href="#浏览器跨域以及解决方法" class="headerlink" title="浏览器跨域以及解决方法"></a>浏览器跨域以及解决方法</h1><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7094162429310926855">https://juejin.cn/post/7094162429310926855</a></p>
+<p>览器有一个重要的安全策略，称之为「同源策略」</p>
+<p>其中，源&#x3D;协议+主机+端口源，<strong>两个源相同，称之为同源，两个源不同，称之为跨源或跨域</strong></p>
+<p>有多种方式解决跨域问题，常见的有：</p>
+<ul>
+<li><strong>代理</strong>，常用</li>
+<li><strong>CORS</strong>，常用</li>
+<li>JSONP</li>
+</ul>
+<p>无论使用哪一种方式，都是要让浏览器知道，我这次跨域请求的是自己人，就不要拦截了。</p>
+<h2 id="跨域解决方法1-代理"><a href="#跨域解决方法1-代理" class="headerlink" title="跨域解决方法1-代理"></a>跨域解决方法1-代理</h2><p><strong>对于前端开发而言</strong>，大部分的跨域问题，都是通过代理解决的</p>
+<p><strong>代理适用的场景是：生产环境不发生跨域，但开发环境发生跨域</strong></p>
+<p>因此，只需要在开发环境使用代理解决跨域即可，这种代理又称之为开发代理</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/476218fe8ac54be9addf17812ada3e21~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt=" https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/476218fe8ac54be9addf17812ada3e21~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"> </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue 的开发服务器代理配置(webpack同理)</span></span><br><span class="line"><span class="comment">// vue.config.js</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">devServer</span>: &#123; <span class="comment">// 配置开发服务器</span></span><br><span class="line">    <span class="attr">proxy</span>: &#123; <span class="comment">// 配置代理</span></span><br><span class="line">      <span class="string">&quot;/api&quot;</span>: &#123; <span class="comment">// 若请求路径以 /api 开头</span></span><br><span class="line">        <span class="attr">target</span>: <span class="string">&quot;http://dev.taobao.com&quot;</span>, <span class="comment">// 将其转发到 http://dev.taobao.com</span></span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="跨域解决方法2-JSONP"><a href="#跨域解决方法2-JSONP" class="headerlink" title="跨域解决方法2-JSONP"></a>跨域解决方法2-JSONP</h2><p>在CORS出现之前，人们想了一种奇妙的办法来实现跨域，这就是JSONP。</p>
+<p>要实现JSONP，需要浏览器和服务器来一个天衣无缝的绝妙配合。</p>
+<p>JSONP的做法是：<strong>当需要跨域请求时，不使用AJAX，转而生成一个script元素去请求服务器，由于浏览器并不阻止script元素的请求，这样请求可以到达服务器。服务器拿到请求后，响应一段JS代码，这段代码实际上是一个函数调用，调用的是客户端预先生成好的函数，并把浏览器需要的数据作为参数传递到函数中，从而间接的把数据传递给客户端</strong></p>
+<h2 id="跨域解决方法3-CORS"><a href="#跨域解决方法3-CORS" class="headerlink" title="跨域解决方法3-CORS"></a>跨域解决方法3-CORS</h2><p><code>CORS</code>是基于<code>http1.1</code>的一种跨域解决方案，它的全称是<strong>C</strong>ross-<strong>O</strong>rigin <strong>R</strong>esource <strong>S</strong>haring，跨域资源共享。</p>
+<p>它的总体思路是：<strong>如果浏览器要跨域访问服务器的资源，需要获得服务器的允许</strong></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/60224199bf4f481caa505e6de7ee46fa~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp">!()</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>前端面试题--基础</p><p><a href="https://ihuan123.github.io/note/2022/07/10/前端面试题——基础/">https://ihuan123.github.io/note/2022/07/10/前端面试题——基础/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>IHuan123</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2022-07-10</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2024-11-18</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"></div><div style="display:flex;justify-content:space-between;align-items:center;"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/note/tags/JavaScript/">JavaScript </a></div></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/note/2022/07/18/vue-router%E9%9D%A2%E8%AF%95%E9%A2%98/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">vue-router面试题</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/note/2022/07/09/js%E9%AB%98%E9%A2%91%E6%89%8B%E5%86%99%E5%AE%9E%E7%8E%B0/"><span class="level-item">高频手写实现</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "6c1c3257140832cdeca55013173020e2",
+            repo: "blog",
+            owner: "IHuan123",
+            clientID: "67c282af028dafe35991",
+            clientSecret: "c97915ab7ba1661603bf54146da66c41b8124014",
+            admin: ["IHuan123"],
+            createIssueManually: true,
+            distractionFreeMode: false,
+            perPage: 10,
+            pagerDirection: "last",
+            
+            
+            enableHotKey: true,
+            language: "zh-CN",
+        })
+        gitalk.render('comment-container')</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="https://avatars.githubusercontent.com/u/42716044?v=4" alt="wanghuan"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">wanghuan</p><p class="is-size-6 is-block">super_huan@outlook.com</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>成都</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/note/archives"><p class="title">15</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/note/categories"><p class="title">10</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/note/tags"><p class="title">9</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/IHuan123" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/IHuan123"><i class="fab fa-github"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#Map和Set的区别，Map和Object的区别"><span class="level-left"><span class="level-item">1</span><span class="level-item">Map和Set的区别，Map和Object的区别</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#Map和Set的区别"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">Map和Set的区别</span></span></a></li><li><a class="level is-mobile" href="#Objects-和-maps-的比较"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">Objects 和 maps 的比较</span></span></a></li></ul></li><li><a class="level is-mobile" href="#数组的filter、every、flat的作用"><span class="level-left"><span class="level-item">2</span><span class="level-item">数组的filter、every、flat的作用</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#filter"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">filter</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#参数"><span class="level-left"><span class="level-item">2.1.1</span><span class="level-item">参数</span></span></a></li><li><a class="level is-mobile" href="#返回值"><span class="level-left"><span class="level-item">2.1.2</span><span class="level-item">返回值</span></span></a></li><li><a class="level is-mobile" href="#描述"><span class="level-left"><span class="level-item">2.1.3</span><span class="level-item">描述</span></span></a></li></ul></li><li><a class="level is-mobile" href="#every"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">every</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#参数-1"><span class="level-left"><span class="level-item">2.2.1</span><span class="level-item">参数</span></span></a></li><li><a class="level is-mobile" href="#返回值-1"><span class="level-left"><span class="level-item">2.2.2</span><span class="level-item">返回值</span></span></a></li><li><a class="level is-mobile" href="#描述-1"><span class="level-left"><span class="level-item">2.2.3</span><span class="level-item">描述</span></span></a></li></ul></li><li><a class="level is-mobile" href="#flat"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">flat</span></span></a></li></ul></li><li><a class="level is-mobile" href="#ES6十大特性"><span class="level-left"><span class="level-item">3</span><span class="level-item">ES6十大特性</span></span></a></li><li><a class="level is-mobile" href="#Promise"><span class="level-left"><span class="level-item">4</span><span class="level-item">Promise</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#Promise-x2F-A-规范"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">Promise/A+ 规范</span></span></a></li></ul></li><li><a class="level is-mobile" href="#Promise的all和race有什么区别"><span class="level-left"><span class="level-item">5</span><span class="level-item">Promise的all和race有什么区别</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#Promise-all"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">Promise.all</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#完成（Fulfillment）："><span class="level-left"><span class="level-item">5.1.1</span><span class="level-item">完成（Fulfillment）：</span></span></a></li><li><a class="level is-mobile" href="#失败-x2F-拒绝（Rejection）："><span class="level-left"><span class="level-item">5.1.2</span><span class="level-item">失败/拒绝（Rejection）：</span></span></a></li></ul></li><li><a class="level is-mobile" href="#Promise-race"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">Promise.race</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#描述-2"><span class="level-left"><span class="level-item">5.2.1</span><span class="level-item">描述</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#var、let、const区别"><span class="level-left"><span class="level-item">6</span><span class="level-item">var、let、const区别</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#var"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">var</span></span></a></li><li><a class="level is-mobile" href="#let"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">let</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#暂时性死区"><span class="level-left"><span class="level-item">6.2.1</span><span class="level-item">暂时性死区</span></span></a></li></ul></li><li><a class="level is-mobile" href="#const"><span class="level-left"><span class="level-item">6.3</span><span class="level-item">const</span></span></a></li></ul></li><li><a class="level is-mobile" href="#闭包"><span class="level-left"><span class="level-item">7</span><span class="level-item">闭包</span></span></a></li><li><a class="level is-mobile" href="#BFC"><span class="level-left"><span class="level-item">8</span><span class="level-item">BFC</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#概念"><span class="level-left"><span class="level-item">8.1</span><span class="level-item">概念</span></span></a></li><li><a class="level is-mobile" href="#形成BFC的条件"><span class="level-left"><span class="level-item">8.2</span><span class="level-item">形成BFC的条件</span></span></a></li><li><a class="level is-mobile" href="#BFC常见作用"><span class="level-left"><span class="level-item">8.3</span><span class="level-item">BFC常见作用</span></span></a></li></ul></li><li><a class="level is-mobile" href="#事件冒泡和事件捕获"><span class="level-left"><span class="level-item">9</span><span class="level-item">事件冒泡和事件捕获</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#事件冒泡"><span class="level-left"><span class="level-item">9.1</span><span class="level-item">事件冒泡</span></span></a></li><li><a class="level is-mobile" href="#事件捕获"><span class="level-left"><span class="level-item">9.2</span><span class="level-item">事件捕获</span></span></a></li><li><a class="level is-mobile" href="#addEventListener-的第三个参数"><span class="level-left"><span class="level-item">9.3</span><span class="level-item">addEventListener 的第三个参数</span></span></a></li></ul></li><li><a class="level is-mobile" href="#浏览器输入URL后发生了什么"><span class="level-left"><span class="level-item">10</span><span class="level-item">浏览器输入URL后发生了什么</span></span></a></li><li><a class="level is-mobile" href="#谈谈-HTTPS"><span class="level-left"><span class="level-item">11</span><span class="level-item">谈谈 HTTPS</span></span></a></li><li><a class="level is-mobile" href="#谈谈前端的安全知识？XSS、CSRF，以及如何防范。"><span class="level-left"><span class="level-item">12</span><span class="level-item">谈谈前端的安全知识？XSS、CSRF，以及如何防范。</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#问：new-一个构造函数，如果函数返回-return-、-return-null-，-return-1-，-return-true-会发生什么情况？"><span class="level-left"><span class="level-item">12.1</span><span class="level-item">问：new 一个构造函数，如果函数返回 return {} 、 return null ， return 1 ， return true 会发生什么情况？</span></span></a></li></ul></li><li><a class="level is-mobile" href="#什么是作用域？"><span class="level-left"><span class="level-item">13</span><span class="level-item">什么是作用域？</span></span></a></li><li><a class="level is-mobile" href="#什么是作用域链？"><span class="level-left"><span class="level-item">14</span><span class="level-item">什么是作用域链？</span></span></a></li><li><a class="level is-mobile" href="#JS-隐式转换，显示转换"><span class="level-left"><span class="level-item">15</span><span class="level-item">JS 隐式转换，显示转换</span></span></a></li><li><a class="level is-mobile" href="#JS-数据类型"><span class="level-left"><span class="level-item">16</span><span class="level-item">JS 数据类型</span></span></a></li><li><a class="level is-mobile" href="#Number-的存储空间是多大？如果后台发送了一个超过最大自己的数字怎么办"><span class="level-left"><span class="level-item">17</span><span class="level-item">Number() 的存储空间是多大？如果后台发送了一个超过最大自己的数字怎么办</span></span></a></li><li><a class="level is-mobile" href="#原型与原型链"><span class="level-left"><span class="level-item">18</span><span class="level-item">原型与原型链</span></span></a></li><li><a class="level is-mobile" href="#如果一个构造函数，bind了一个对象，用这个构造函数创建出的实例会继承这个对象的属性吗？为什么？"><span class="level-left"><span class="level-item">19</span><span class="level-item">如果一个构造函数，bind了一个对象，用这个构造函数创建出的实例会继承这个对象的属性吗？为什么？</span></span></a></li><li><a class="level is-mobile" href="#浏览器跨域以及解决方法"><span class="level-left"><span class="level-item">20</span><span class="level-item">浏览器跨域以及解决方法</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#跨域解决方法1-代理"><span class="level-left"><span class="level-item">20.1</span><span class="level-item">跨域解决方法1-代理</span></span></a></li><li><a class="level is-mobile" href="#跨域解决方法2-JSONP"><span class="level-left"><span class="level-item">20.2</span><span class="level-item">跨域解决方法2-JSONP</span></span></a></li><li><a class="level is-mobile" href="#跨域解决方法3-CORS"><span class="level-left"><span class="level-item">20.3</span><span class="level-item">跨域解决方法3-CORS</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/note/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer test-css"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/note/"><img src="/note/img/logo.svg" alt="wanghuan" height="28"></a><p class="is-size-7"><span>&copy; 2024 IHuan123</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/IHuan123"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/note/js/column.js"></script><script src="/note/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/note/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/note/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/note/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/note/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
